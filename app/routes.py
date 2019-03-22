@@ -32,4 +32,4 @@ def about():
 @app.route('/login')
 def login():
     form = LoginForm()
-    return render_template('login.html', app_title=app_title, title='Sign In')
+    return render_template('login.html', app_title=app_title, title='Sign In', form=form)
