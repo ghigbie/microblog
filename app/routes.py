@@ -29,7 +29,7 @@ def index():
 def about():
     return render_template('about.html', app_title=app_title, title='About')
 
-@app.route('/login', methods=['GET', 'POST']
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
