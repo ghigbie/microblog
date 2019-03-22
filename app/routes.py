@@ -1,7 +1,8 @@
 from app import app
 from flask import render_template
+from app.forms import LoginForm
 
-title = "Microblog"
+app_title = "Microblog"
 
 @app.route('/')
 @app.route('/index')
@@ -21,9 +22,14 @@ def index():
             'body': 'The Avengers movie was so cool!'
         }
     ]
-    return render_template('home.html', title=title, user=user, posts=posts)
+    return render_template('home.html', app_title=app_title, title='Home', user=user, posts=posts)
 
 
 @app.route('/about')
 def about():
-    return render_template('about.html', title=title)
+    return render_template('about.html', app_title=app_title, title='About')
+
+@app.route('/login')
+def login():
+    form = LoginForm()
+    return render_template('login.html', app_title=app_title, title='Sign In')
