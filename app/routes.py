@@ -41,6 +41,6 @@ def login():
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password') #This message intentonally does not specify which
             return redirect(url_for('login'))
-        login_user(user, remeber=form.remember_me.data)
+        login_user(user, remember=form.remember_me.data)
         return redirect('/index')
     return render_template('login.html', app_title=app_title, title='Sign In', form=form)
