@@ -34,5 +34,10 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         flash(f'Login requested for user {form.username.data}, remember_me= {form.remember_me.data}')
-        return redirect('/index')
+        return redirect('index')
     return render_template('login.html', app_title=app_title, title='Sign In', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('logout'))
