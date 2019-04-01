@@ -8,6 +8,7 @@ app_title = "Microblog"
 
 @app.route('/')
 @app.route('/index')
+@login_required
 def index():
     user = {'username': 'Miguel'}
     posts = [
