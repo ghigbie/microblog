@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for
-from flask_login import login_user, current_user
+from flask_login import login_user, current_user, logout_user
 from app import app
 from app.forms import LoginForm
 from app.models import User
@@ -42,5 +42,11 @@ def login():
             flash('Invalid username or password') #This message intentonally does not specify which
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
-        return redirect('/index')
+        return redirect('index')
     return render_template('login.html', app_title=app_title, title='Sign In', form=form)
+
+
+    @app.route('/logout')
+    def logout():
+        logout_user()
+        return redirect(url_for('index'))
