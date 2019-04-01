@@ -1,5 +1,5 @@
-from flask import render_template, flash, redirect, url_for
-from flask_login import login_user, current_user, logout_user
+from flask import render_template, flash, redirect
+from flask_login import current_user, login_user, logout_user, login_required
 from app import app
 from app.forms import LoginForm
 from app.models import User
@@ -33,25 +33,8 @@ def about():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-<<<<<<< HEAD
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password') #This message intentonally does not specify which
-            return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me.data)
-        return redirect('index')
-    return render_template('login.html', app_title=app_title, title='Sign In', form=form)
-
-
-    @app.route('/logout')
-    def logout():
-        logout_user()
-        return redirect(url_for('index'))
-=======
         flash(f'Login requested for user {form.username.data}, remember_me= {form.remember_me.data}')
         return redirect('index')
     return render_template('login.html', app_title=app_title, title='Sign In', form=form)
@@ -60,4 +43,3 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('logout'))
->>>>>>> 0334b28fd3e8d5e92b7c15dcecca058b5a1128eb
