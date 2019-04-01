@@ -37,6 +37,7 @@ def login():
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
+<<<<<<< HEAD
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password') #This message intentonally does not specify which
@@ -50,3 +51,13 @@ def login():
     def logout():
         logout_user()
         return redirect(url_for('index'))
+=======
+        flash(f'Login requested for user {form.username.data}, remember_me= {form.remember_me.data}')
+        return redirect('index')
+    return render_template('login.html', app_title=app_title, title='Sign In', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('logout'))
+>>>>>>> 0334b28fd3e8d5e92b7c15dcecca058b5a1128eb
