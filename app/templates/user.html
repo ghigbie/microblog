@@ -2,5 +2,8 @@
 
 {% block content %}
 <h1>{{ title }} page</h1>
-<p>What are you doing with your life?</p>
+<h1>{{ user.username }}</h1>
+    {% for [post in posts %}
+    <p> {{ post.author.username }} says: <b>{{ post.body }}</b>
+    {% endfor %}
 {% endblock %}
