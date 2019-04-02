@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, url_for, request
 from werkzeug.urls import url_parse
 from flask_login import current_user, login_user, logout_user, login_required
-from app import app
-from app.forms import LoginForm
+from app import app, db
+from app.forms import LoginForm, RegistrationForm
 from app.models import User
 
 app_title = "Microblog"
@@ -66,5 +66,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.sessin.commit()
+        flash('Congratulations, you are now a registered user!')
+        return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form)
 
-    return render_template('register.html', app_title=app_title, title=title)
